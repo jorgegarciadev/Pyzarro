@@ -1,0 +1,8 @@
+{
+  "url": "http://cualesmiip.co.vu/ip",
+  "smpt_server": "smtp.example.com",
+  "mail_login" : "example@example.com",
+  "password" : "s3cr3t",
+  "mail_to" : "me@example.com"
+
+}
