@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from smtplib import SMTP
+import smtplib
 
 def composeSubject(number, name = None):
     subject = number
@@ -16,14 +16,14 @@ def composeMail(mail_login, to, subject, body):
 
 def sendMail(message, mail_login, mail_password, to, smpt_server):
     try:
-        mail = SMTP(smpt_server)
-    except smtp.socket.gaierror:
+        mail = smtplib.SMTP(smpt_server)
+    except smtplib.socket.gaierror:
         print "Error al conectar al servidor SMTP."
         return False
     try:
         mail.starttls()
         mail.login(mail_login, mail_password)
-    except SMTPAuthentucationError:
+    except smtplib.SMTPAuthenticationError:
         mail.quit()
         print "Error al identificarse al servidor SMTP."
         return False
