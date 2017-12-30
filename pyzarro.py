@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import urllib2, time, json
+import requests, time, json
 from SMTPclient import *
 
 lastIP = ""
@@ -13,6 +13,7 @@ config = json.loads(rawData)
 
 # Loads configuration
 URL = config["url"]
+backup = config["backup"]
 smpt_server = config["smpt_server"]
 mail_login = config["mail_login"]
 password = config["password"]
@@ -25,19 +26,19 @@ while True:
     # and wait 5 minutes and try again.
     
     try:
-        newIP = urllib2.urlopen(URL).read()
+        response = requests.get(URL)
+        if response.status_code == 503:
+            response = requests.get(backup)
+        newIP = response.text
         if(lastIP != newIP):
-            
             print newIP
-    # When the IP is changed the script sends an email to the administrator.
-            lastIP = newIP
-            
+            # When the IP is changed the script sends an email to the administrator.
+            lastIP = newIP  
             subject = "Nueva IP para Domo.Granada"
             body = "La nueva IP para Domo.Granada es %s." % newIP
             message = composeMail(mail_login, to, subject, body)
-
             sendMail(message, mail_login, password, to, smpt_server)
-    except:
-        pass
+    except Exception, e:
+        print e
     
     time.sleep(300)

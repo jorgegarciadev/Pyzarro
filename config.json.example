@@ -1,5 +1,6 @@
 {
   "url": "http://cualesmiip.co.vu/ip",
+  "backup": "https://cualesmiip2.herokuapp.com/ip",
   "smpt_server": "smtp.example.com",
   "mail_login" : "example@example.com",
   "password" : "s3cr3t",
