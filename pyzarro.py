@@ -27,8 +27,8 @@ while True:
     
     try:
         response = requests.get(URL)
-        if response.status_code == 503:
-            response = requests.get(backup)
+        # if response.status_code == 503:
+        #     response = requests.get(backup)
         newIP = response.text
         if(lastIP != newIP):
             print newIP
