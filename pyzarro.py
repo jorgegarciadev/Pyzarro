@@ -36,8 +36,8 @@ while True:
             lastIP = newIP  
             subject = "Nueva IP para Domo.Granada"
             body = "La nueva IP para Domo.Granada es %s." % newIP
-            message = composeMail(mail_login, to, subject, body)
-            sendMail(message, mail_login, password, to, smpt_server)
+            message = composeMail("mail_login", to, subject, body)
+            sendMail(message, mail_login, password, to, smpt_server, 587)
     except Exception, e:
         print e
     
